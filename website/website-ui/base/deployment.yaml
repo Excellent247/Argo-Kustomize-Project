@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: website-ui
+  template:
+    metadata:
+      labels:
+        app: website-ui
+    spec:
+      containers:
+      - name: website-ui
+        image: website-ui:latest
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: website-ui-config
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: website-ext-ingress
+  annotations:
+    kubernetes.io/ingress.class: "external"
+spec:
+  rules:
+    - host: website.example.com
+      http:
+        paths:
+          - path: /policy-api
+            pathType: Prefix
+            backend:
+              service:
+                name: policy-api
+                port:
+                  number: 80
+          - path: /website-ui
+            pathType: Prefix
+            backend:
+              service:
+                name: website-ui
+                port:
+                  number: 80

@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website-ui
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+      - name: website-ui
+        image: website-ui:prod
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+          limits:
+            memory: "256Mi"
+            cpu: "1000m"

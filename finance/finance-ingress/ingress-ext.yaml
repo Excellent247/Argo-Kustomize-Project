@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: finance-ext-ingress
+  annotations:
+    kubernetes.io/ingress.class: "external"
+spec:
+  rules:
+    - host: finance.example.com
+      http:
+        paths:
+          - path: /integration-api
+            pathType: Prefix
+            backend:
+              service:
+                name: integration-api
+                port:
+                  number: 80
+          - path: /payment-poc-api
+            pathType: Prefix
+            backend:
+              service:
+                name: payment-poc-api
+                port:
+                  number: 80

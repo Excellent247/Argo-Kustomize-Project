@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: website-ui-config
+data:
+  APP_ENV: base
+  UI_THEME: default
+  API_BASE_URL: "http://policy-api.dev.svc.cluster.local"
+  LOG_LEVEL: info
