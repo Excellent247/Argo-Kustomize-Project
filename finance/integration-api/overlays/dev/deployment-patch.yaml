@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: integration-api
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: integration-api
+        image: integration-api:dev
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

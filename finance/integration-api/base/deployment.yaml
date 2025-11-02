@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: integration-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: integration-api
+  template:
+    metadata:
+      labels:
+        app: integration-api
+    spec:
+      containers:
+      - name: integration-api
+        image: integration-api:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        envFrom:
+        - configMapRef:
+            name: integration-api-config
