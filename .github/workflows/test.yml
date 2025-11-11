@@ -51,7 +51,7 @@ jobs:
           scan-type: 'fs'
           scan-ref: '.'
           format: 'sarif'
-          output: 'trivy-deps-results.sarif'
+          output: 'dependency-scan-result.table'
           severity: 'CRITICAL,HIGH'
           exit-code: '1' # Exit with code 1 if vulnerabilities found
           scanners: 'vuln,secret,config'
@@ -61,7 +61,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dependency scan result
-          path: "${{ github.event.repository.name }}-dependency-scan-result.table"
+          path: "dependency-scan-result.table"
           retention-days: 1
       # - name: Upload Dependency Scan Results to GitHub Security
       #   uses: github/codeql-action/upload-sarif@v3
