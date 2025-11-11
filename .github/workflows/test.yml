@@ -55,10 +55,17 @@ jobs:
           severity: 'CRITICAL,HIGH'
           exit-code: '1' # Exit with code 1 if vulnerabilities found
           scanners: 'vuln,secret,config'
-
-      - name: Upload Dependency Scan Results to GitHub Security
-        uses: github/codeql-action/upload-sarif@v3
+      
+      - name: Upload Trivy scan result
         if: always()
+        uses: actions/upload-artifact@v4
         with:
-          sarif_file: 'trivy-deps-results.sarif'
-          category: 'dependency-scan'
+          name: dependency scan result
+          path: "${{ github.event.repository.name }}-dependency-scan-result.table"
+          retention-days: 1
+      # - name: Upload Dependency Scan Results to GitHub Security
+      #   uses: github/codeql-action/upload-sarif@v3
+      #   if: always()
+      #   with:
+      #     sarif_file: 'trivy-deps-results.sarif'
+      #     category: 'dependency-scan'
