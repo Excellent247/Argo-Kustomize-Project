@@ -28,3 +28,37 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_ENABLE_SUMMARY: true
+  
+      # 2. SAST - Semgrep
+      - name: Semgrep Security Scan
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: >-
+            p/security-audit
+            p/secrets
+            p/owasp-top-ten
+            p/java
+        env:
+          SEMGREP_RULES: >-
+            p/security-audit
+            p/secrets
+            p/owasp-top-ten
+
+      # SCA - Dependency Scanning with Trivy (Filesystem)
+      - name: Trivy Dependency Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-deps-results.sarif'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '0' # Don't fail build, just report
+          scanners: 'vuln,secret,config'
+
+      - name: Upload Dependency Scan Results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-deps-results.sarif'
+          category: 'dependency-scan'
