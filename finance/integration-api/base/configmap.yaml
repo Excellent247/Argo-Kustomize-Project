@@ -8,3 +8,4 @@ data:
   LOG_LEVEL: info
   API_PORT: "8080"
   INTEGRATION_ENDPOINT: "http://integration-service"
+  DB_PASSWORD: "Gjhsjhsh§$4@@hdhj"
