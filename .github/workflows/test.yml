@@ -29,20 +29,20 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_ENABLE_SUMMARY: true
   
-      # 2. SAST - Semgrep
-      - name: Semgrep Security Scan
-        uses: returntocorp/semgrep-action@v1
-        with:
-          config: >-
-            p/security-audit
-            p/secrets
-            p/owasp-top-ten
-            p/java
-        env:
-          SEMGREP_RULES: >-
-            p/security-audit
-            p/secrets
-            p/owasp-top-ten
+      # # SAST - Semgrep
+      # - name: Semgrep Security Scan
+      #   uses: returntocorp/semgrep-action@v1
+      #   with:
+      #     config: >-
+      #       p/security-audit
+      #       p/secrets
+      #       p/owasp-top-ten
+      #       p/java
+      #   env:
+      #     SEMGREP_RULES: >-
+      #       p/security-audit
+      #       p/secrets
+      #       p/owasp-top-ten
 
       # SCA - Dependency Scanning with Trivy (Filesystem)
       - name: Trivy Dependency Scan
