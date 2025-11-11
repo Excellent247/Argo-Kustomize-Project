@@ -53,7 +53,7 @@ jobs:
           format: 'sarif'
           output: 'trivy-deps-results.sarif'
           severity: 'CRITICAL,HIGH'
-          exit-code: '0' # Don't fail build, just report
+          exit-code: '1' # Exit with code 1 if vulnerabilities found
           scanners: 'vuln,secret,config'
 
       - name: Upload Dependency Scan Results to GitHub Security
